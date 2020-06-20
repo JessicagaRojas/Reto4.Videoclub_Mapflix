@@ -1,23 +1,20 @@
-//Requerimos la carpeta "models" y le pasamos la función USER para traer el archivo
-const { User, Token } = require('../models'); 
-const bcryptjs = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-
-const UserController = { 
+const { User, Token } = require('../models');//requerimos la carpeta models y le pasasmos la funcion user para traer ese archivo
+const bcryptjs = require('bcryptjs');//requerimos la libreria bcrypsjs para la encriptacion de contraseñas
+const jwt = require('jsonwebtoken');//requerimos la libreria jsonwebtoken para la creacion de tokens
+const UserController = {
     getAll(req, res) {
         User.findAll()
             .then(users => res.send(users))
-            .catch(error => { 
+            .catch(error => {
                 console.error(error);
-                res.status(500).send({ message: 'La hemos cagado ^^U' });
+                res.status(500).send({ message: 'There was a problem trying to create the user' });
             })
-        
     },
     async signup(req,res) {
         try {
-            const user = await User.create(req.body);
             const hash = await bcryptjs.hash(req.body.password, 9);
             req.body.password = hash;
+            const user = await User.create(req.body);
             res.status(200).send(user)
         } catch (error) {
             console.log(error)
@@ -31,13 +28,13 @@ const UserController = {
                     email: req.body.email
                 }
             });
-            const isMatch = await bcrypt.compare(req.body.password, user.password);
+            const isMatch = await bcryptjs.compare(req.body.password, user.password);
             if (!isMatch) {
-                throw new Error('Wrong username or password.')
+                throw new Error('Has equivocado el password o el usuario')
             }
-            const token = jwt.sign({ id: user.id}, 'patata123', { expiresIn: '2y' });
+            const token = jwt.sign({ id: user.id}, 'patata123', { expiresIn: '2s' });
             await Token.create({ 
-                token:token,
+                token: token,
                 UserId: user.id,
                 revoked: false
             });
@@ -45,13 +42,9 @@ const UserController = {
         } catch (error) {
             console.error(error);
             return res.status(500).send({
-                message: 'There was a problem trying to login'
+                message: 'la has cagado en algun momento.'
             });
         }
     }
-
-}; 
-
-
-
- module.exports = UserController //Exportamos UserController y toda su lógica
+}
+module.exports = UserController;//exportamos usercontroller y toda su logica
