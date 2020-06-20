@@ -45,6 +45,20 @@ const UserController = {
                 message: 'la has cagado en algun momento.'
             });
         }
+    },
+    async delete(req,res) {
+        try {
+            const { id } = req.params
+            const user = await User.destroy({
+                where : {
+                    id : id
+                }
+            })
+            res.status(200).send({ message : 'Usuario eliminado'})
+        } catch (error) {
+            console.log(error)
+            res.status(500).send({ message : 'Hay un problema logeando el usuario'})
+        }
     }
 }
 module.exports = UserController;//exportamos usercontroller y toda su logica

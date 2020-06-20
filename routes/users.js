@@ -24,4 +24,6 @@ const  { auth }  = require('../middlewares/auth');//requerimos el archivo auth d
 router.get('/', auth, UserController.getAll);//para traernos a todos los usuarios
 router.post('/signup', UserController.signup);//para crear un usuario y meterlo en la base de datos
 router.post('/login', UserController.login);//para logear a un usuario ya creado en la base de datos
+
+router.delete('/delete/:id', UserController.delete); //Para eliminar usuario. Poner /delete: "ID usuario con número" en Postman
 module.exports = router;//exportamos las funciones
