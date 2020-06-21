@@ -1,4 +1,4 @@
-const { User, Token } = require('../models');//requerimos la carpeta models y le pasasmos la funcion user para traer ese archivo
+const { User, Token } = require('../models');//requerimos la carpeta models y le pasamos la funcion user para traer ese archivo
 const bcryptjs = require('bcryptjs');//requerimos la libreria bcrypsjs para la encriptacion de contraseñas
 const jwt = require('jsonwebtoken');//requerimos la libreria jsonwebtoken para la creacion de tokens
 const UserController = {
@@ -7,7 +7,7 @@ const UserController = {
             .then(users => res.send(users))
             .catch(error => {
                 console.error(error);
-                res.status(500).send({ message: 'There was a problem trying to create the user' });
+                res.status(500).send({ message: 'Error al crear el usuario' });
             })
     },
     async signup(req,res) {
@@ -18,7 +18,7 @@ const UserController = {
             res.status(200).send(user)
         } catch (error) {
             console.log(error)
-            res.status(500).send({ message : 'There was a problem trying to add the user'});
+            res.status(500).send({ message : 'Error al añadir usuario'});
         }
     },
     async login(req,res) {
