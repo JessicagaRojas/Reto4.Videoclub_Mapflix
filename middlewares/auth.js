@@ -5,7 +5,7 @@ const auth = async(req, res, next) => {
         //en req.headers estan los headers y guardamos el token en el de authoritation
         const token = req.headers.authorization;
         //obtenemos el payload a partir del token y del secreto con el que firmamos anteriormente el token (consultar login)
-        const payload = jwt.verify(token, 'patata123');
+        const payload = jwt.verify(token, 'bootCampdelInfierno');
         //con findByPk buscamos por id el usuario
         const user = await User.findByPk(payload.id);
         //buscamos el token en la base de datos que no este revocado y que pertenezca a ese usuario

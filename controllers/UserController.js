@@ -32,7 +32,7 @@ const UserController = {
             if (!isMatch) {
                 throw new Error('Has equivocado el password o el usuario')
             }
-            const token = jwt.sign({ id: user.id}, 'patata123', { expiresIn: '2s' });
+            const token = jwt.sign({ id: user.id}, 'bootCampdelInfierno', { expiresIn: '2s' });
             await Token.create({ 
                 token: token,
                 UserId: user.id,
