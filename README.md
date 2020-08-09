@@ -31,8 +31,7 @@ name, email, password.
 
 - Token funcionando.
 
-- Añadidas 1.980 películas de la API. Al añadir +100 se han repetido esas 
-1.980 y ahora aparecen 3.960 ID, pero están repetidas.
+- +1500 películas disponibles
 
-- Con los usuarios pasa algo similar. Al eliminar usuarios no se eliminan sus ID, con lo que los nuevos que se crean van sumando.
+
 
